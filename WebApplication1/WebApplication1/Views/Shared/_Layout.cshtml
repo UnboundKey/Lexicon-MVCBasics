@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/media/css/main.css"/>
+</head>
+<body>
+<div class="wrapper">
+        <header>
+            <img src="/media/Skull.png" alt="Website Logo"/>
+            <ul>
+                <li>
+                    <p>@Html.ActionLink("Index", "Index", "Home")</p></li>
+                <li>
+                    <p>@Html.ActionLink("About", "About", "Home")</p></li>
+                <li>
+                    <p>@Html.ActionLink("Projects", "Projects", "Home")</p></li>
+                <li>
+                    <p>@Html.ActionLink("Contact", "Contact", "Home")</p></li>
+            </ul>
+        </header>
+        @RenderBody()
+        
+        <footer>
+            <p>&copy; Benjamin Nordin @DateTime.Now</p>
+        </footer>
+    
+    </div>
+</body>
+</html>
