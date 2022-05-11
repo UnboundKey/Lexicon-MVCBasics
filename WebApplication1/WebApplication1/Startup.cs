@@ -17,6 +17,11 @@ namespace WebApplication1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,8 +35,10 @@ namespace WebApplication1
 
             app.UseRouting();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("fevercheck", "fevercheck", defaults: new { controller = "Doctor", action = "FeverCheck" });
                 endpoints.MapControllerRoute(default, "{controller=Home}/{action=Index}/{id?}");
                 // endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });

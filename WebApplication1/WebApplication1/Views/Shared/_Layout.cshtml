@@ -10,19 +10,27 @@
             <img src="/media/Skull.png" alt="Website Logo"/>
             <ul>
                 <li>
-                    <p>@Html.ActionLink("Index", "Index", "Home")</p></li>
+
+                    <a asp-controller="Home" asp-action="Index">Index</a>
+                </li>
                 <li>
-                    <p>@Html.ActionLink("About", "About", "Home")</p></li>
+                    <a asp-controller="Home" , asp-action="About">About</a>
+                </li>
                 <li>
-                    <p>@Html.ActionLink("Projects", "Projects", "Home")</p></li>
+                    <a asp-controller="Home" , asp-action="Projects">Projects</a>
+                </li>
                 <li>
-                    <p>@Html.ActionLink("Contact", "Contact", "Home")</p></li>
+                    <a asp-controller="Home" , asp-action="Contact">Contact</a>
+                </li>
+                <li>
+                    <a asp-controller="Doctor" , asp-action="FeverCheck">Temperature Check</a>
+                </li>
             </ul>
         </header>
         @RenderBody()
         
         <footer>
-            <p>&copy; Benjamin Nordin @DateTime.Now</p>
+            <p>&copy; Benjamin Nordin @DateTime.Now.ToString("yy-MM-dd")</p>
         </footer>
     
     </div>
