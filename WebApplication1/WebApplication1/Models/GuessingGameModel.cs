@@ -23,6 +23,11 @@ namespace WebApplication1.Models
 
         public static void CheckWin(ISession session,int GuessedNumber,  Controller con)
         {
+            if(GuessedNumber == null)
+            {
+                con.ViewBag.Message = $"Invalid Value Detected in guess, make sure you use numbers";
+                return;
+            }
             if (GuessedNumber == session.GetInt32("NumberToGuess"))
             {
                 con.ViewBag.Message = $"You won, the number was {session.GetInt32("NumberToGuess")}. I've picked a new one if you want to continue playing";
