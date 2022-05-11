@@ -25,19 +25,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult NumberGuesser(int GuessedNumber)
         {
-            if(GuessedNumber == HttpContext.Session.GetInt32("NumberToGuess"))
-            {
-                ViewBag.Message = $"You won, the number was {HttpContext.Session.GetInt32("NumberToGuess")}. I've picked a new one if you want to continue playing";
-                HttpContext.Session.SetInt32("NumberToGuess", new GuessingGameModel().GetNumber());
-
-            } else if (GuessedNumber > HttpContext.Session.GetInt32("NumberToGuess"))
-            {
-                ViewBag.Message = $"Go Lower";
-            }
-            else if (GuessedNumber < HttpContext.Session.GetInt32("NumberToGuess"))
-            {
-                ViewBag.Message = $"Go Higher";
-            }
+            GuessingGameModel.CheckWin(HttpContext.Session,GuessedNumber,this);
             return View();
         }
     }

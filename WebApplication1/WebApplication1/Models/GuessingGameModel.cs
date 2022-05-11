@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +19,24 @@ namespace WebApplication1.Models
         public int GetNumber()
         {
             return randomNumber;
+        }
+
+        public static void CheckWin(ISession session,int GuessedNumber,  Controller con)
+        {
+            if (GuessedNumber == session.GetInt32("NumberToGuess"))
+            {
+                con.ViewBag.Message = $"You won, the number was {session.GetInt32("NumberToGuess")}. I've picked a new one if you want to continue playing";
+                session.SetInt32("NumberToGuess", new GuessingGameModel().GetNumber());
+
+            }
+            else if (GuessedNumber > session.GetInt32("NumberToGuess"))
+            {
+                con.ViewBag.Message = $"Go Lower";
+            }
+            else if (GuessedNumber < session.GetInt32("NumberToGuess"))
+            {
+                con.ViewBag.Message = $"Go Higher";
+            }
         }
 
     }
