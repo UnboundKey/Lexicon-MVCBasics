@@ -39,6 +39,7 @@ namespace WebApplication1
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("fevercheck", "fevercheck", defaults: new { controller = "Doctor", action = "FeverCheck" });
+                endpoints.MapControllerRoute("GuessingGame", "GuessingGame", defaults: new { controller = "Games", action = "NumberGuesser" });
                 endpoints.MapControllerRoute(default, "{controller=Home}/{action=Index}/{id?}");
                 // endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
