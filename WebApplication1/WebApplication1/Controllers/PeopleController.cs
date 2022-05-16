@@ -9,15 +9,41 @@ namespace WebApplication1.Controllers
 {
     public class PeopleController : Controller
     {
+        PeopleViewModel pwm = new PeopleViewModel();
+
         public IActionResult Index()
         {
-            PeopleViewModel pwm = new PeopleViewModel();
             return View(pwm);
         }
 
-        public IActionResult Create()
+        [HttpPost]
+        public IActionResult Index(string searchTerm)
         {
+            
+            pwm.searchTerm = searchTerm;
+            return View(pwm);
+        }
+        [HttpPost]
+        public IActionResult Create(CreatePersonViewModel cpwm)
+        {
+           if(ModelState.IsValid)
+            {
+               
+            }
             return Index();
+        }
+
+        public IActionResult Delete(int personId)
+        {
+            foreach (Models.Person p in pwm.getPeople())
+            {
+                if (personId == p.Id)
+                {
+                    pwm.getPeople().Remove(p);
+                    break;
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

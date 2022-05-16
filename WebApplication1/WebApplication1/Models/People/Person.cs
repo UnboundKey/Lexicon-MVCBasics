@@ -8,6 +8,8 @@ namespace WebApplication1.Models
 {
     public class Person
     {
+        private static int PersonIDCount = 1;
+        public int Id { get; private set; }
         [Required]
         [StringLength (20)]
         public string Name { get; set; }
@@ -23,6 +25,8 @@ namespace WebApplication1.Models
             this.Name = name;
             this.PhoneNumber = phoneNumber;
             this.City = city;
+            this.Id = PersonIDCount;
+            PersonIDCount++;
         }
     }
 }

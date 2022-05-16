@@ -3,15 +3,29 @@
 *@
 @model WebApplication1.Models.People.PeopleViewModel;
 
+<form method="post">
+    <label>Search</label>
+    <input type="text" name="searchTerm" />
+    <input type="submit" />
+</form>
+
+<form asp-action="Create" method="post">
+    <label>Person Name</label>
+    <input type="text" name="searchTerm" />
+    <input type="submit" />
+</form>
+
+
 <table>
     @{
-        foreach (WebApplication1.Models.Person p in Model.getPeople())
+        foreach (WebApplication1.Models.Person p in Model.getPeople(Model.searchTerm))
         {
-        <tr>
-            <td>@p.Name</td>
-            <td>@p.PhoneNumber</td>
-            <td>@p.City</td>
-        </tr>
+            <tr id="">
+                <td>@p.Name</td>
+                <td>@p.PhoneNumber</td>
+                <td>@p.City</td>
+                <td><a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a></td>
+            </tr>
         }
     }
 </table>
