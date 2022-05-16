@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model WebApplication1.Models.People.PeopleViewModel;
+
+<table>
+    @{
+        foreach (WebApplication1.Models.Person p in Model.getPeople())
+        {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.PhoneNumber</td>
+            <td>@p.City</td>
+        </tr>
+        }
+    }
+</table>
+
