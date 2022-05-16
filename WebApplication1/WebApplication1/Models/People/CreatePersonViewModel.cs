@@ -19,19 +19,6 @@ namespace WebApplication1.Models.People
         [StringLength(40)]
         public string PersonCity { get; set; }
 
-
-        public CreatePersonViewModel()
-        {
-
-        }
-
-        public CreatePersonViewModel(string PersonName, int PhoneNumber, string City)
-        {
-            this.PersonName = PersonName;
-            this.PersonPhoneNumber = PhoneNumber;
-            this.PersonCity = City;
-        }
-
         public Person Create(string name, int phoneNumber, string city)
         {
 

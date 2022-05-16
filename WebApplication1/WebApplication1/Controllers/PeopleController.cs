@@ -37,18 +37,9 @@ namespace WebApplication1.Controllers
             }
             return RedirectToAction("Index");
         }
-
         public IActionResult Delete(int personId)
         {
-            foreach (Models.Person p in pwm.getPeople())
-            {
-                if (personId == p.Id)
-                {
-                    pwm.getPeople().Remove(p);
-                    TempData["Message"] = "Person Removed Successfully";
-                    break;
-                }
-            }
+            DeletePersonViewModel.Delete(personId,this);
             return RedirectToAction("Index");
         }
     }
