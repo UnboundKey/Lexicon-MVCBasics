@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.Models.People;
 
 namespace WebApplication1.Models
 {
@@ -28,5 +30,21 @@ namespace WebApplication1.Models
             this.Id = PersonIDCount;
             PersonIDCount++;
         }
+
+        public static void Delete(int PersonId,Controller controller)
+        {
+            PeopleViewModel pwm = new PeopleViewModel();
+            foreach (Person p in pwm.getPeople())
+            {
+                if (PersonId == p.Id)
+                {
+                    pwm.getPeople().Remove(p);
+                    controller.TempData["Message"] = "Person Removed Successfully";
+                    break;
+                }
+            }
+            
+}
+
     }
 }

@@ -39,7 +39,7 @@ namespace WebApplication1.Controllers
         }
         public IActionResult Delete(int personId)
         {
-            DeletePersonViewModel.Delete(personId,this);
+            Person.Delete(personId,this);
             return RedirectToAction("Index");
         }
     }
