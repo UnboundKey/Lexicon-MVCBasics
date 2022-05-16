@@ -39,5 +39,13 @@ namespace WebApplication1.Models.People
             PeopleViewModel.PeopleList.Add(p);
             return p;
         }
+
+        public Person Create()
+        {
+            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
+            PeopleViewModel.PeopleList.Add(p);
+            return p;
+        }
+
     }
 }

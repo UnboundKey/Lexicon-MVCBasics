@@ -9,13 +9,18 @@
     <input type="submit" />
 </form>
 
+<h3>Create Person</h3>
 <form asp-action="Create" method="post">
     <label>Person Name</label>
-    <input type="text" name="searchTerm" />
+    <input type="text" name="PersonName" />
+    <label>Phone Number</label>
+    <input type="number" name="PersonPhoneNumber" />
+    <label>City</label>
+    <input type="text" name="PersonCity" />
     <input type="submit" />
 </form>
 
-
+<p>@TempData["Message"]</p>
 <table>
     @{
         foreach (WebApplication1.Models.Person p in Model.getPeople(Model.searchTerm))

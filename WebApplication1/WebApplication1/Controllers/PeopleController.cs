@@ -25,12 +25,17 @@ namespace WebApplication1.Controllers
         }
         [HttpPost]
         public IActionResult Create(CreatePersonViewModel cpwm)
-        {
-           if(ModelState.IsValid)
+        { 
+           if (ModelState.IsValid)
             {
-               
+                cpwm.Create();
+                TempData["Message"] = "Person Created Successfully";
             }
-            return Index();
+           else
+            {
+                TempData["Message"] = "Could Not Create Person, Make sure you filled the form correctly";
+            }
+            return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int personId)
@@ -40,6 +45,7 @@ namespace WebApplication1.Controllers
                 if (personId == p.Id)
                 {
                     pwm.getPeople().Remove(p);
+                    TempData["Message"] = "Person Removed Successfully";
                     break;
                 }
             }
