@@ -17,6 +17,11 @@ namespace WebApplication1.Controllers
         {
             PeopleViewModel wm = new PeopleViewModel();
             Person resultPerson = null;
+            return InputResponseView(personid, wm, ref resultPerson);
+        }
+
+        private IActionResult InputResponseView(int personid, PeopleViewModel wm, ref Person resultPerson)
+        {
             if (ModelState.IsValid)
             {
                 if (personid > wm.getPeople().Count)
@@ -32,16 +37,19 @@ namespace WebApplication1.Controllers
                         resultPerson = p;
                         break;
                     }
-                    else if (p == null)
-                    {
-                        resultPerson = wm.getPeople().ElementAt(0);
-                    }
+                    
+                }
+                if (resultPerson == null)
+                {
+                    TempData["Message"] = $"Could not find detail about Person with ID: {personid}";
+                    return PartialView("/Views/People/_Person.cshtml");
                 }
                 return PartialView("/Views/People/_Person.cshtml", resultPerson.Id);
             }
             TempData["Message"] = "Invalid Input in form, please make sure it is filled correctly before submitting";
             return PartialView("/Views/People/_Person.cshtml");
         }
+
         [HttpPost]
         public IActionResult Delete(int personid)
         {

@@ -1,7 +1,13 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860   
 *@
+
+@{
+PeopleViewModel pwm = new PeopleViewModel();
+};
+
 @using WebApplication1.Models.People
+
 @model WebApplication1.Models.People.PeopleViewModel;
 
 <form method="post">
@@ -21,8 +27,6 @@
     <input type="submit" />
 </form>
 
-<p>@TempData["Message"]</p>
-
-<partial name="_Person.cshtml"/>
+<partial name="_Person.cshtml" model="pwm.searchTerm" />
 
 
