@@ -1,9 +1,10 @@
 ﻿@using WebApplication1.Models.People
-@Model p
-<div>
-    <p></p>
-    <p></p>
-    <p></p>
+
+<div class="row">
+    <p>@ViewData["PersonName"]</p>
+    <p>@ViewData["PersonPhoneNumber"]</p>
+    <p>@ViewData["PersonCity"]</p>
+    <a asp-action="Delete" asp-route-personId="@ViewData["PersonID"]">Delete Person</a>
 </div>
 @*<td>@p.Name</td>
 <td>@p.PhoneNumber</td>

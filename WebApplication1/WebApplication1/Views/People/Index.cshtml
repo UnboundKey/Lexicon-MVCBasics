@@ -25,7 +25,11 @@
     @{
         foreach (WebApplication1.Models.Person p in Model.getPeople(Model.searchTerm))
         {
-            <partial name="_Person.cshtml"/>
+            ViewData["PersonName"] = p.Name;
+            ViewData["PersonPhoneNumber"] = p.PhoneNumber;
+            ViewData["PersonCity"] = p.City;
+            ViewData["PersonID"] = p.Id;
+            <partial name="_Person.cshtml" view-data="ViewData"/>
         }
     }
 </table>

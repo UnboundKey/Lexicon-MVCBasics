@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "RCuw+BTUNXtyyxlU8Zxe7i6gBdwL5JmdqhDKVZgaEeIECb3v1jUDF2gaZOqXc6kgJwiLDCG2LWXFFFt3X75q7A==",
+  "dgSpecHash": "BNukyfYm7dMfwUbdFWMcd1wZdTgc/OXVVHBcuZN20u+q75v618DSRbpmra9yhg847JDBESZFd0nY5RFJYom6Kg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Benjamin\\Documents\\GitHub\\Lexicon-MVCBasics\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Benjamin\\.nuget\\packages\\bootstrap\\5.1.3\\bootstrap.5.1.3.nupkg.sha512",
     "C:\\Users\\Benjamin\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Benjamin\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Benjamin\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
