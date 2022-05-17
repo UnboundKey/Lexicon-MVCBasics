@@ -8,6 +8,7 @@ namespace WebApplication1.Models.People
 {
     public class CreatePersonViewModel
     {
+        //TODO Fix bug where leading zero in phone numbers are removed.
 
         [Required]
         [StringLength(20)]

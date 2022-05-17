@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApplication1.Models.People;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.People
 {
     public class Person
     {
-        private static int PersonIDCount = 1;
+        private static int _personIdCount = 1;
         public int Id { get; private set; }
         [Required]
         [StringLength (20)]
@@ -27,16 +22,16 @@ namespace WebApplication1.Models
             this.Name = name;
             this.PhoneNumber = phoneNumber;
             this.City = city;
-            this.Id = PersonIDCount;
-            PersonIDCount++;
+            this.Id = _personIdCount;
+            _personIdCount++;
         }
 
-        public static void Delete(int PersonId,Controller controller)
+        public static void Delete(int personId,Controller controller)
         {
             PeopleViewModel pwm = new PeopleViewModel();
             foreach (Person p in pwm.getPeople())
             {
-                if (PersonId == p.Id)
+                if (personId == p.Id)
                 {
                     pwm.getPeople().Remove(p);
                     controller.TempData["Message"] = "Person Removed Successfully";
@@ -44,7 +39,7 @@ namespace WebApplication1.Models
                 }
             }
             
-}
+        }
 
     }
 }

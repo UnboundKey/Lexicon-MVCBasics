@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         public IActionResult Index()
         {
             
-            return View();
+            return RedirectToAction("NumberGuesser");
         }
 
         public IActionResult NumberGuesser()
