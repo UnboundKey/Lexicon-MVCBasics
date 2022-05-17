@@ -38,5 +38,23 @@ namespace WebApplication1.Models.People
             }
             return sortedPeople;
         }
+
+        public List<Person> getPeople(int searchTerm)
+        {
+            List<Person> sortedPeople = new List<Person>();
+            foreach (Person person in PeopleList)
+            {
+                if (searchTerm == 0)
+                {
+                    sortedPeople = getPeople();
+                    break;
+                }
+                if (person.Id == searchTerm)
+                {
+                    sortedPeople.Add(person);
+                }
+            }
+            return sortedPeople;
+        }
     }
 }

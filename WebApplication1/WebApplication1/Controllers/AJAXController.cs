@@ -17,17 +17,42 @@ namespace WebApplication1.Controllers
         {
             PeopleViewModel wm = new PeopleViewModel();
             Person resultPerson = null;
-            foreach(Person p in wm.getPeople())
+            if (ModelState.IsValid)
             {
-                if(p.Id == personid)
+                if (personid > wm.getPeople().Count)
                 {
-                    resultPerson = p;
-                } else if (p == null)
-                {
-                   resultPerson = wm.getPeople().ElementAt(0);
+                    TempData["Message"] = $"Could not find person with id {personid}, make sure you enter a valid id before continuing";
+                    return PartialView("/Views/People/_Person.cshtml");
                 }
+
+                foreach (Person p in wm.getPeople())
+                {
+                    if (p.Id == personid)
+                    {
+                        resultPerson = p;
+                        break;
+                    }
+                    else if (p == null)
+                    {
+                        resultPerson = wm.getPeople().ElementAt(0);
+                    }
+                }
+                return PartialView("/Views/People/_Person.cshtml", resultPerson.Id);
             }
-            return PartialView("/Views/People/_Person.cshtml", resultPerson);
+            TempData["Message"] = "Invalid Input in form, please make sure it is filled correctly before submitting";
+            return PartialView("/Views/People/_Person.cshtml");
+        }
+        [HttpPost]
+        public IActionResult Delete(int personid)
+        {
+            Person.Delete(personid, this);
+            return PartialView("/Views/People/_Person.cshtml");
+
+        }
+
+        public IActionResult GetAll()
+        {
+            return PartialView("/Views/People/_Person.cshtml");
         }
 
     }

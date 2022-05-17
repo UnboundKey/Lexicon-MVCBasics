@@ -38,6 +38,7 @@ namespace WebApplication1.Models.People
                     break;
                 }
             }
+            controller.TempData["Message"] = "Could not remove Person";
             
         }
 

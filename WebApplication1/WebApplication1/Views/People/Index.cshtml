@@ -22,11 +22,7 @@
 </form>
 
 <p>@TempData["Message"]</p>
-    @{
-        foreach (Person p in Model.getPeople(Model.searchTerm))
-        {
-            <partial name="_Person.cshtml" model="p"/>
-        }
-    }
+
+<partial name="_Person.cshtml"/>
 
 
