@@ -24,12 +24,6 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (personid > wm.getPeople().Count)
-                {
-                    TempData["Message"] = $"Could not find person with id {personid}, make sure you enter a valid id before continuing";
-                    return PartialView("/Views/People/_Person.cshtml");
-                }
-
                 foreach (Person p in wm.getPeople())
                 {
                     if (p.Id == personid)
