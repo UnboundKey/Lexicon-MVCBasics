@@ -20,26 +20,22 @@ namespace WebApplication1.Controllers
             return InputResponseView(personid, wm, ref resultPerson);
         }
 
-        private IActionResult InputResponseView(int personid, PeopleViewModel wm, ref Person resultPerson)
+        private IActionResult InputResponseView(int personid, PeopleViewModel wm, ref Person foundPerson)
         {
             if (ModelState.IsValid)
             {
-                foreach (Person p in wm.getPeople())
-                {
-                    if (p.Id == personid)
-                    {
-                        resultPerson = p;
-                        break;
-                    }
-                    
-                }
-                if (resultPerson == null)
+                foundPerson = wm.FindByID(personid);
+
+                bool isPersonInvalid = (foundPerson == null);
+                if (isPersonInvalid)
                 {
                     TempData["Message"] = $"Could not find detail about Person with ID: {personid}";
                     return PartialView("/Views/AJAX/_Message.cshtml");
                 }
-                return PartialView("/Views/People/_Person.cshtml", resultPerson.Id);
+                //Found Person Propperly
+                return PartialView("/Views/People/_Person.cshtml", foundPerson.Id);
             }
+            // Invalid ModelState
             TempData["Message"] = "Invalid Input in form, please make sure it is filled correctly before submitting";
             return PartialView("/Views/AJAX/_Message.cshtml");
         }

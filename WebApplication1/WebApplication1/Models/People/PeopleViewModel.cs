@@ -56,5 +56,21 @@ namespace WebApplication1.Models.People
             }
             return sortedPeople;
         }
+
+        public Person FindByID(int personid)
+        {
+            Person resultPerson = null;
+            foreach (Person p in this.getPeople())
+            {
+                if (p.Id == personid)
+                {
+                    resultPerson = p;
+                    break;
+                }
+
+            }
+            return resultPerson;
+        }
+
     }
 }
