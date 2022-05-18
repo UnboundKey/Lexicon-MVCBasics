@@ -14,13 +14,13 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
+            
             return View(pwm);
         }
 
         [HttpPost]
         public IActionResult Index(string searchTerm)
         {
-            
             pwm.searchTerm = searchTerm;
             return View(pwm);
         }

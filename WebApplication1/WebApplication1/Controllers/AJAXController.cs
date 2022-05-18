@@ -42,19 +42,19 @@ namespace WebApplication1.Controllers
                 if (resultPerson == null)
                 {
                     TempData["Message"] = $"Could not find detail about Person with ID: {personid}";
-                    return PartialView("/Views/People/_Person.cshtml");
+                    return PartialView("/Views/AJAX/_Message.cshtml");
                 }
                 return PartialView("/Views/People/_Person.cshtml", resultPerson.Id);
             }
             TempData["Message"] = "Invalid Input in form, please make sure it is filled correctly before submitting";
-            return PartialView("/Views/People/_Person.cshtml");
+            return PartialView("/Views/AJAX/_Message.cshtml");
         }
 
         [HttpPost]
         public IActionResult Delete(int personid)
         {
             Person.Delete(personid, this);
-            return PartialView("/Views/People/_Person.cshtml");
+            return PartialView("/Views/AJAX/_Message.cshtml");
 
         }
 

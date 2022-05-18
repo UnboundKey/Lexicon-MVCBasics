@@ -1,17 +1,18 @@
 ﻿@using WebApplication1.Models.People
 
 
-<p>@TempData["Message"]</p>
-<div class="row">
+
+
     @{
         PeopleViewModel pwm = new PeopleViewModel();
         foreach (Person p in pwm.getPeople(Model))
         {
+        <div class="row">
             <p>@p.Name</p>
             <p>@p.PhoneNumber</p>
             <p>@p.City</p>
             <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
             <p>ID: @p.Id</p>
-        }
-    }
-</div>
+        </div>            
+            }
+            }
