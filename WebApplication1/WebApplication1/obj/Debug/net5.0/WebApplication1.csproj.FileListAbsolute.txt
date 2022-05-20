@@ -159,3 +159,7 @@ C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplicat
 C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Doctor\FeverCheck.cshtml.g.cs
 C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\Games\NumberGuesser.cshtml.g.cs
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\People\Index.cshtml.g.cs
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\People\_Person.cshtml.g.cs
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\AJAX\Index.cshtml.g.cs
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net5.0\Razor\Views\AJAX\_Message.cshtml.g.cs
