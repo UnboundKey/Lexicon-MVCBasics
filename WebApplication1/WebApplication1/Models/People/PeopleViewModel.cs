@@ -7,13 +7,8 @@ namespace WebApplication1.Models.People
 {
     public class PeopleViewModel
     {
-        public static List<Person> PeopleList = new List<Person> {
-            new Person("Benjamin", 555213345,"Gondor"),
-            new Person("Luz Nozeda", 555112385,"Bones Burrow"),
-            new Person("Eda Clawthorn", 222876988,"Bones Burrow"),
-            new Person("King Clawthorn", 222876988,"Bones Burrow"),
-            new Person("Legolas", 2000000,"Eraborn"),
-        };
+        public static List<Person> PeopleList = new List<Person> {};
+
         public string searchTerm;
 
         public List<Person> getPeople()

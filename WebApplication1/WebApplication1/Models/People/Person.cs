@@ -6,6 +6,7 @@ namespace WebApplication1.Models.People
     public class Person
     {
         private static int _personIdCount = 1;
+        [Key]
         public int Id { get; private set; }
         [Required]
         [StringLength (20)]

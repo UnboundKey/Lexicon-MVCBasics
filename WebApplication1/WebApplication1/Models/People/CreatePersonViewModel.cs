@@ -23,16 +23,18 @@ namespace WebApplication1.Models.People
         public Person Create(string name, int phoneNumber, string city)
         {
 
-            Person p = new Person(name, phoneNumber, city);
-            PeopleViewModel.PeopleList.Add(p);
-            return p;
+            //Person p = new Person(name, phoneNumber, city);
+            //PeopleViewModel.PeopleList.Add(p);
+            //return p;
+            return null;
         }
 
         public Person Create()
         {
-            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
-            PeopleViewModel.PeopleList.Add(p);
-            return p;
+            //Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
+            //PeopleViewModel.PeopleList.Add(p);
+            //return p;
+            return null;
         }
 
     }
