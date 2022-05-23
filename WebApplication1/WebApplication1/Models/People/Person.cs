@@ -7,7 +7,7 @@ namespace WebApplication1.Models.People
     {
         private static int _personIdCount = 1;
         [Key]
-        public int Id { get; private set; }
+        public int Id { get; set; }
         [Required]
         [StringLength (20)]
         public string Name { get; set; }
@@ -25,6 +25,14 @@ namespace WebApplication1.Models.People
             this.City = city;
             this.Id = _personIdCount;
             _personIdCount++;
+        }
+
+        public Person(int id, string name, int phonenumber, string city)
+        {
+            this.Id = id;
+            this.Name = name;
+            this.City = city;
+            this.PhoneNumber = phonenumber;
         }
 
         public static void Delete(int personId,Controller controller)
