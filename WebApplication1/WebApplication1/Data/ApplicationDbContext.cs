@@ -5,12 +5,26 @@ using WebApplication1.Models.People;
 
 namespace WebApplication1.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext 
     {
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+
+        }
+
+        public ApplicationDbContext()
+        {
+
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(
+                @"Server=(localdb)\mssqllocaldb;Database=PeopleDb;Trusted_Connection=True");
             
         }
+
 
         public DbSet<Person> People { get; set; }
 

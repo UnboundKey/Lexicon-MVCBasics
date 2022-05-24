@@ -1,11 +1,8 @@
 ﻿@using WebApplication1.Models.People
 
-
-
-
     @{
         PeopleViewModel pwm = new PeopleViewModel();
-        foreach (Person p in pwm.getPeople(Model))
+        foreach (Person p in Model)
         {
         <div class="row">
             <p>@p.Name</p>

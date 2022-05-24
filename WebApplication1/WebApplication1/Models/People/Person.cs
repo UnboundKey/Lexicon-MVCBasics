@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using WebApplication1.Data;
 
 namespace WebApplication1.Models.People
 {
@@ -23,8 +25,8 @@ namespace WebApplication1.Models.People
             this.Name = name;
             this.PhoneNumber = phoneNumber;
             this.City = city;
-            this.Id = _personIdCount;
-            _personIdCount++;
+            //this.Id = _personIdCount;
+            //_personIdCount++;
         }
 
         public Person(int id, string name, int phonenumber, string city)
@@ -38,6 +40,10 @@ namespace WebApplication1.Models.People
         public static void Delete(int personId,Controller controller)
         {
             PeopleViewModel pwm = new PeopleViewModel();
+
+
+
+
             foreach (Person p in pwm.getPeople())
             {
                 if (personId == p.Id)
@@ -46,8 +52,22 @@ namespace WebApplication1.Models.People
                     controller.TempData["Message"] = "Person Removed Successfully";
                     break;
                 }
-                controller.TempData["Message"] = "Could not remove Person";
+               controller.TempData["Message"] = "Could not remove Person";
             }   
+        }
+
+        public static void Delete(int id, Controller controller, ApplicationDbContext dbContext)
+        {
+            var toDelete = dbContext.People.Where(p => p.Id == id).Single<Person>();
+            if (toDelete != null)
+            {
+                dbContext.People.Remove(toDelete);
+                dbContext.SaveChanges();
+                controller.TempData["Message"] = "Person Removed Successfully";
+            } else
+            {
+                controller.TempData["Message"] = "Could not remove Person";
+            }
         }
 
     }

@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.Data;
 
 namespace WebApplication1.Models.People
 {
     public class PeopleViewModel
     {
-        public static List<Person> PeopleList = new List<Person> {};
+        public static List<Person> PeopleList = new List<Person> { };
 
         public string searchTerm;
+
+        public IConfiguration Configuration;
 
         public List<Person> getPeople()
         {

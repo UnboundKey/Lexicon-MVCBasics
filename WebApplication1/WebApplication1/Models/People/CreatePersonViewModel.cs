@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.Data;
 
 namespace WebApplication1.Models.People
 {
@@ -10,6 +12,11 @@ namespace WebApplication1.Models.People
     {
         //TODO Fix bug where leading zero in phone numbers are removed.
 
+        public CreatePersonViewModel()
+        {
+
+        }
+        
         [Required]
         [StringLength(20)]
         public string PersonName { get; set; }
@@ -31,10 +38,19 @@ namespace WebApplication1.Models.People
 
         public Person Create()
         {
-            //Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
-            //PeopleViewModel.PeopleList.Add(p);
-            //return p;
-            return null;
+            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
+            PeopleViewModel.PeopleList.Add(p);
+            //ApplicationDbContext.People.Add(p);
+            return p;
+            //return null;
+        }
+
+        public Person Create(ApplicationDbContext db)
+        {
+            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
+            db.People.Add(p);
+            db.SaveChanges();
+            return p;
         }
 
     }
