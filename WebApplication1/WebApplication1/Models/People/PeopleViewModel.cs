@@ -30,7 +30,7 @@ namespace WebApplication1.Models.People
                     sortedPeople = getPeople();
                     break;
                 }
-                if (person.Name.Contains(searchTerm) || person.City.CityName.Contains(searchTerm))
+                if (person.Name.Contains(searchTerm) || person.City.Name.Contains(searchTerm))
                 {
                     sortedPeople.Add(person);
                 }
@@ -48,7 +48,7 @@ namespace WebApplication1.Models.People
                     sortedPeople = getPeople();
                     break;
                 }
-                if (person.Id == searchTerm)
+                if (person.PersonId == searchTerm)
                 {
                     sortedPeople.Add(person);
                 }
@@ -61,7 +61,7 @@ namespace WebApplication1.Models.People
             Person resultPerson = null;
             foreach (Person p in this.getPeople())
             {
-                if (p.Id == personid)
+                if (p.PersonId == personid)
                 {
                     resultPerson = p;
                     break;

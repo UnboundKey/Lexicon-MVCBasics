@@ -1,18 +1,23 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using WebApplication1.Models.People;
 
 namespace WebApplication1.Models
 {
     public class City
     {
-        public int Id { get; set; }
-        public string CityName { get; set; }
-        public ICollection<Person> People { get; set; }
+        [Key]
+        public int CityId { get; set; } = 1;
+        public string Name { get; set; }
+        public List<Person> People { get; set; }
 
-        public City(int id, string cityName)
+        public Country Country { get; set; }
+        public int CountryId { get; set; }
+
+        public City(int cityId, string name)
         {
-            this.Id = id;
-            this.CityName = cityName;
+            this.CityId = cityId;
+            this.Name = name;
         }
     }
 }

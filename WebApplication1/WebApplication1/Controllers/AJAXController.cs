@@ -33,7 +33,7 @@ namespace WebApplication1.Controllers
                     return PartialView("/Views/AJAX/_Message.cshtml");
                 }
                 //Found Person Propperly
-                return PartialView("/Views/People/_Person.cshtml", foundPerson.Id);
+                return PartialView("/Views/People/_Person.cshtml", foundPerson.PersonId);
             }
             // Invalid ModelState
             TempData["Message"] = "Invalid Input in form, please make sure it is filled correctly before submitting";

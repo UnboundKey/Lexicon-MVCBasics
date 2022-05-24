@@ -7,34 +7,46 @@ namespace WebApplication1.Models.People
 {
     public class Person
     {
-        private static int _personIdCount = 1;
+        private string personName;
+        private int personPhoneNumber;
+
         [Key]
-        public int Id { get; set; }
+        public int PersonId { get; set; }
         [Required]
         [StringLength (20)]
         public string Name { get; set; }
         [Required]
         [Range (0,9999999999)]
         public int PhoneNumber { get; set; }
+
         [Required]
         [StringLength (40)]
         public City City { get; set; }
+        public int CityId { get; set; }
 
-        public Person(string name, int phoneNumber, City city)
+
+        public Person(string name, int phoneNumber, int cityId)
         {
             this.Name = name;
             this.PhoneNumber = phoneNumber;
-            this.City = city;
+            this.City = City;
             //this.Id = _personIdCount;
             //_personIdCount++;
         }
 
-        public Person(int id, string name, int phonenumber, City city)
+        public Person(int personId, string name, int phonenumber, City city)
         {
-            this.Id = id;
+            this.PersonId = personId;
             this.Name = name;
-            this.City = city;
+            City = city;
             this.PhoneNumber = phonenumber;
+        }
+
+        public Person(string personName, int personPhoneNumber, City city)
+        {
+            this.personName = personName;
+            this.personPhoneNumber = personPhoneNumber;
+            City = city;
         }
 
         public static void Delete(int personId,Controller controller)
@@ -46,7 +58,7 @@ namespace WebApplication1.Models.People
 
             foreach (Person p in pwm.getPeople())
             {
-                if (personId == p.Id)
+                if (personId == p.PersonId)
                 {
                     pwm.getPeople().Remove(p);
                     controller.TempData["Message"] = "Person Removed Successfully";
@@ -58,7 +70,7 @@ namespace WebApplication1.Models.People
 
         public static void Delete(int id, Controller controller, ApplicationDbContext dbContext)
         {
-            var toDelete = dbContext.People.Where(p => p.Id == id).Single<Person>();
+            var toDelete = dbContext.People.Where(p => p.PersonId == id).Single<Person>();
             if (toDelete != null)
             {
                 dbContext.People.Remove(toDelete);

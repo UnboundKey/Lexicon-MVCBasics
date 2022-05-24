@@ -37,7 +37,7 @@ namespace WebApplication1
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")).EnableSensitiveDataLogging(true));
            
         }
 

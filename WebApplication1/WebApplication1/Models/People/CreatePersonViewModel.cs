@@ -33,7 +33,7 @@ namespace WebApplication1.Models.People
 
         public Person Create()
         {
-            // ToFIX
+            // ToFIX 
 
             //Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
             //PeopleViewModel.PeopleList.Add(p);
@@ -42,7 +42,7 @@ namespace WebApplication1.Models.People
 
         public Person Create(ApplicationDbContext db)
         {
-            Person p = new Person(PersonName, PersonPhoneNumber, db.Cities.Where(c => c.CityName == PersonCity).ToList().First());
+            Person p = new Person(PersonName, PersonPhoneNumber, db.Cities.Where(c => c.Name == PersonCity).ToList().First());
             db.People.Add(p);
             db.SaveChanges();
             return p;

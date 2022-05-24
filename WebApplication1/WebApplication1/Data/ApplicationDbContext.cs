@@ -5,27 +5,25 @@ using WebApplication1.Models.People;
 
 namespace WebApplication1.Data
 {
-    public class ApplicationDbContext : DbContext 
+    public class ApplicationDbContext : DbContext
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            
         }
-
-        
-
 
         public DbSet<Person> People { get; set; }
         public DbSet<City> Cities { get; set; }
+
+
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             City city1 = new City(1, "Gothenburg");
             City city2 = new City(2, "Trelleborg");
-            City city3 = new City(1, "Malmo");
-            City city4 = new City(1, "Jönsköping");
+            City city3 = new City(3, "Malmo");
+            City city4 = new City(4, "Jönsköping");
             modelBuilder.Entity<City>().HasData (
                 city1,
                 city2,
@@ -33,7 +31,7 @@ namespace WebApplication1.Data
                 city4
                     
             );
-
+            
             modelBuilder.Entity<Person>().HasData(
             new Person(1,"Benjamin Nordin", 555123, city1),
             new Person(2,"Eda Clawthorn", 6694875, city2),
@@ -42,6 +40,11 @@ namespace WebApplication1.Data
             new Person(5,"Jonas Edenstav",031222666,city4)
 
                 );
+
+            //modelBuilder.Entity<Person>().HasOne(e => e.City).WithMany(e => e.People).HasForeignKey(e => e.CityId);
+            modelBuilder.Entity<City>().HasMany(e => e.People).WithOne(e => e.City);
+            //modelBuilder.Entity<Country>().HasMany(e => e.Cities).WithOne(e => e.Country);
+
         }
         
 
