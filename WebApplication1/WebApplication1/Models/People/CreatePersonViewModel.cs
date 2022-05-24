@@ -11,11 +11,6 @@ namespace WebApplication1.Models.People
     public class CreatePersonViewModel
     {
         //TODO Fix bug where leading zero in phone numbers are removed.
-
-        public CreatePersonViewModel()
-        {
-
-        }
         
         [Required]
         [StringLength(20)]
@@ -38,16 +33,16 @@ namespace WebApplication1.Models.People
 
         public Person Create()
         {
-            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
-            PeopleViewModel.PeopleList.Add(p);
-            //ApplicationDbContext.People.Add(p);
-            return p;
-            //return null;
+            // ToFIX
+
+            //Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
+            //PeopleViewModel.PeopleList.Add(p);
+            return null;
         }
 
         public Person Create(ApplicationDbContext db)
         {
-            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
+            Person p = new Person(PersonName, PersonPhoneNumber, db.Cities.Where(c => c.CityName == PersonCity).ToList().First());
             db.People.Add(p);
             db.SaveChanges();
             return p;

@@ -18,9 +18,9 @@ namespace WebApplication1.Models.People
         public int PhoneNumber { get; set; }
         [Required]
         [StringLength (40)]
-        public string City { get; set; }
+        public City City { get; set; }
 
-        public Person(string name, int phoneNumber, string city)
+        public Person(string name, int phoneNumber, City city)
         {
             this.Name = name;
             this.PhoneNumber = phoneNumber;
@@ -29,7 +29,7 @@ namespace WebApplication1.Models.People
             //_personIdCount++;
         }
 
-        public Person(int id, string name, int phonenumber, string city)
+        public Person(int id, string name, int phonenumber, City city)
         {
             this.Id = id;
             this.Name = name;

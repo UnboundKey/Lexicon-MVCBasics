@@ -30,7 +30,7 @@ namespace WebApplication1.Models.People
                     sortedPeople = getPeople();
                     break;
                 }
-                if (person.Name.Contains(searchTerm) || person.City.Contains(searchTerm))
+                if (person.Name.Contains(searchTerm) || person.City.CityName.Contains(searchTerm))
                 {
                     sortedPeople.Add(person);
                 }
