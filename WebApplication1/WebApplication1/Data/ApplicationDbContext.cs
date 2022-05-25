@@ -33,6 +33,8 @@ namespace WebApplication1.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<City>().HasData(new City() { Id = 1, Name = "Gothenburg" });
+
             modelBuilder.Entity<Person>().HasData(
 
             new Person(1,"Benjamin Nordin", 555123, "Gothenburg"),

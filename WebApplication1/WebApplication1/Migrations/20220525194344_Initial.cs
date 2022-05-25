@@ -62,6 +62,11 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "CountryId", "Name" },
+                values: new object[] { 1, null, "Gothenburg" });
+
+            migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "City", "Name", "PersonCityId", "PhoneNumber" },
                 values: new object[,]

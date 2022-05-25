@@ -36,7 +36,7 @@ public class PeopleController : Controller
             pwm.searchTerm = searchTerm;
 
             DatabaseResult = dbContext.People.Where(b => b.Name.Contains(searchTerm)).ToList();
-            DatabaseResult.AddRange(dbContext.People.Where(b => b.City.Contains(searchTerm)).ToList());
+            DatabaseResult.AddRange(dbContext.People.Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());
 
             return View(DatabaseResult);
         }
