@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using WebApplication1.Models;
 using WebApplication1.Models.People;
 
 namespace WebApplication1.Data
@@ -26,6 +27,8 @@ namespace WebApplication1.Data
         }
 
 
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<Person> People { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
