@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using WebApplication1.Data;
 
@@ -16,9 +17,22 @@ namespace WebApplication1.Models.People
         [Required]
         [Range (0,9999999999)]
         public int PhoneNumber { get; set; }
-        [Required]
         [StringLength (40)]
         public string City { get; set; }
+
+        public City PersonCity { get; set; }
+        [ForeignKey("PersonCityId")]
+        public int? PersonCityId { get; set; }
+
+        // Database Compatible Constructor
+        public Person(string name, int phoneNumber, int cityId)
+        {
+            Name = name;
+            PhoneNumber = phoneNumber;
+            PersonCityId = cityId;
+        }
+
+        // Legacy Constructors
 
         public Person(string name, int phoneNumber, string city)
         {

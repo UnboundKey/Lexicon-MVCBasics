@@ -23,9 +23,11 @@ namespace WebApplication1.Models.People
         [Required]
         [Range(0, 9999999999)]
         public int PersonPhoneNumber { get; set; }
-        [Required]
+        
         [StringLength(40)]
         public string PersonCity { get; set; }
+        [Required]
+        public int personCityId { get; set; }
 
         public Person Create(string name, int phoneNumber, string city)
         {
@@ -43,6 +45,14 @@ namespace WebApplication1.Models.People
             //ApplicationDbContext.People.Add(p);
             return p;
             //return null;
+        }
+
+        public Person Create(ApplicationDbContext db,int cityId)
+        {
+            Person p = new Person(PersonName, PersonPhoneNumber, cityId);
+            db.People.Add(p);
+            db.SaveChanges();
+            return p;
         }
 
         public Person Create(ApplicationDbContext db)

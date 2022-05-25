@@ -12,7 +12,7 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220525110319_Initial")]
+    [Migration("20220525193551_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,24 +70,23 @@ namespace WebApplication1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int?>("PersonCityId")
+                        .HasColumnType("int");
+
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("PersonCityId");
 
                     b.ToTable("People");
 
@@ -138,9 +137,11 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.People.Person", b =>
                 {
-                    b.HasOne("WebApplication1.Models.City", null)
+                    b.HasOne("WebApplication1.Models.City", "PersonCity")
                         .WithMany("people")
-                        .HasForeignKey("CityId");
+                        .HasForeignKey("PersonCityId");
+
+                    b.Navigation("PersonCity");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.City", b =>

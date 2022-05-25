@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,8 @@ public class PeopleController : Controller
         private List<Person> DatabaseResult;
         public object Index()
         {
-           DatabaseResult = dbContext.People.ToList();
-            
-
+            DatabaseResult = dbContext.People.ToList();
+            ViewBag.Cities = new SelectList(dbContext.Cities, "Id", "Name");
             return View(DatabaseResult);
         }
 
@@ -41,11 +41,11 @@ public class PeopleController : Controller
             return View(DatabaseResult);
         }
         [HttpPost]
-        public IActionResult Create(CreatePersonViewModel cpwm)
+        public IActionResult Create(CreatePersonViewModel cpwm, int CityId)
         { 
            if (ModelState.IsValid)
             {
-                cpwm.Create(dbContext);
+                cpwm.Create(dbContext, CityId);
                 TempData["Message"] = "Person Created Successfully";
             }
            else

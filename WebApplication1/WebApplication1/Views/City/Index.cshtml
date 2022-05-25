@@ -1,0 +1,16 @@
+﻿@using WebApplication1.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h3>City Index</h3>
+<a asp-action="CreateCity">Create City</a>
+
+@foreach(City c in Model) {
+    <div>
+        <p>@c.Name</p>
+        <p>@c.Id</p>
+        <p>@c.people</p>
+    </div>
+}

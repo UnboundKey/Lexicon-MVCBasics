@@ -48,29 +48,29 @@ namespace WebApplication1.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     PhoneNumber = table.Column<int>(type: "int", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
-                    CityId = table.Column<int>(type: "int", nullable: true)
+                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
+                    PersonCityId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_People", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_People_Cities_CityId",
-                        column: x => x.CityId,
+                        name: "FK_People_Cities_PersonCityId",
+                        column: x => x.PersonCityId,
                         principalTable: "Cities",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
                 table: "People",
-                columns: new[] { "Id", "City", "CityId", "Name", "PhoneNumber" },
+                columns: new[] { "Id", "City", "Name", "PersonCityId", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 1, "Gothenburg", null, "Benjamin Nordin", 555123 },
-                    { 2, "Bones Burrow", null, "Eda Clawthorn", 6694875 },
-                    { 3, "Bones Burrow", null, "King Clawthorn", 555213345 },
-                    { 4, "Newtopia", null, "Marcy Wou", 777485632 },
-                    { 5, "Gothenburg", null, "Jonas Edenstav", 31222666 }
+                    { 1, "Gothenburg", "Benjamin Nordin", null, 555123 },
+                    { 2, "Bones Burrow", "Eda Clawthorn", null, 6694875 },
+                    { 3, "Bones Burrow", "King Clawthorn", null, 555213345 },
+                    { 4, "Newtopia", "Marcy Wou", null, 777485632 },
+                    { 5, "Gothenburg", "Jonas Edenstav", null, 31222666 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -79,9 +79,9 @@ namespace WebApplication1.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_People_CityId",
+                name: "IX_People_PersonCityId",
                 table: "People",
-                column: "CityId");
+                column: "PersonCityId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
