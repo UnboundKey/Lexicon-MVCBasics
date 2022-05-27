@@ -5,16 +5,18 @@
 @{
 }
 <h3>Country Index</h3>
+<a asp-action="CreateCountry">Create Country</a>
+<p>@TempData["Message"]</p>
 
 @foreach(Country country in Model) {
-    <p>@country.Name</p>
-    <p>@country.Id</p>
+    <p>Country Name: @country.Name</p>
+    <p>Country ID: @country.Id</p>
     <p>Cities: </p>
     <ul>
         @foreach(City ctiy in country.Cities) {
             <li>@ctiy.Name</li>
         }
     </ul>
-    
+    <a asp-action="DeleteCountry" asp-route-CountryId="@country.Id">Delete Country</a>
     <hr />
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebApplication1.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -19,5 +20,50 @@ namespace WebApplication1.Controllers
             var databaseResult = dbContext.Countries.Include("Cities").ToList();
             return View(databaseResult);
         }
+
+        public IActionResult CreateCountry()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateCountry(Country country)
+        {
+            if (ModelState.IsValid)
+            {
+                dbContext.Countries.Add(country);
+                dbContext.SaveChanges();
+                ViewData["Message"] = "Country Created Successfully";
+                return RedirectToAction("Index");
+            }
+            ViewData["Message"] = "Make sure you've filled in the form correctly";
+            return View();
+        }
+
+        public IActionResult DeleteCountry(int CountryId)
+        {
+            var toDelete = dbContext.Countries.Include("Cities").Where(p => p.Id == CountryId).Single<Country>();
+
+            if (toDelete != null)
+            {
+                if (!toDelete.Cities.Any())
+                {
+                    dbContext.Countries.Remove(toDelete);
+                    dbContext.SaveChanges();
+                    TempData["Message"] = "Country Removed Successfully";
+                    return RedirectToAction("Index");
+                }
+                TempData["Message"] = "Could not remove Country, Can only remove Countries without Cities";
+
+            }
+            else
+            {
+                TempData["Message"] = "Could not remove Country";
+            };
+
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }

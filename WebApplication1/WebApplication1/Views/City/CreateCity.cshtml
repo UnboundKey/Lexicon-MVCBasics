@@ -9,5 +9,6 @@
 <form asp-action="CreateCity" method="post">
     <label asp-for="Name">City Name</label>
     <input type="text" name="Name" />
+    <select  name="CountryId" asp-items="ViewBag.Countries"></select>
     <input type="submit" />
 </form>

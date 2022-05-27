@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebApplication1.Data;
@@ -22,11 +23,13 @@ namespace WebApplication1.Controllers
 
         public IActionResult CreateCity()
         {
+            ViewBag.Countries = new SelectList(dbContext.Countries, "Id", "Name");
             return View();
         }
         [HttpPost]
         public IActionResult CreateCity(City city)
         {
+
             if (ModelState.IsValid)
             {
                 dbContext.Add(city);

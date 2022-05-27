@@ -10,7 +10,7 @@
 <p>@TempData["Message"]</p>
 @foreach(City c in Model) {
     <div>
-        @if(c.Country.Name != null)
+        @if(c.Country != null)
         {
             <p>Country: @c.Country.Name</p>
         } else

@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
     public class Country
     {
+        [Key]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
         public List<City> Cities { get; set; }
         [ForeignKey("CitiesId")]
@@ -15,7 +18,6 @@ namespace WebApplication1.Models
         {
             Id = id;
             Name = name;
-            CitiesId = citiesId;
         }
 
         public Country()
