@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace WebApplication1.Models.People
         public City PersonCity { get; set; }
         [ForeignKey("PersonCityId")]
         public int? PersonCityId { get; set; }
+
+        public List<Language> KnownLanguages;
 
         // Database Compatible Constructor
         public Person(string name, int phoneNumber, int cityId)

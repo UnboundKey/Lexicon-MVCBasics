@@ -25,12 +25,15 @@ namespace WebApplication1.Data
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<Language> Languages { get; set; }
         public DbSet<Person> People { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
+
             modelBuilder.Entity<Country>().HasData(new Country() { Id = 1, Name = "Sweden" }, new Country() { Id=2, Name="Denmark"});
 
             modelBuilder.Entity<City>().HasData(new City() { Id = 1, Name = "Gothenburg", CountryId=1 }, new City() { Id = 2, Name = "Stockholm", CountryId=1 }, new City() { Id = 3, Name = "Kopenhagen", CountryId = 2 });
