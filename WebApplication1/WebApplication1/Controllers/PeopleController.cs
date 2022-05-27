@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,11 +35,15 @@ public class PeopleController : Controller
         public IActionResult Index(string searchTerm)
         {
             pwm.searchTerm = searchTerm;
+            var SearchResults = new List<Person>();
 
-            DatabaseResult = dbContext.People.Where(b => b.Name.Contains(searchTerm)).ToList();
-            DatabaseResult.AddRange(dbContext.People.Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());
-
-            return View(DatabaseResult);
+            SearchResults.AddRange(dbContext.People.Where(b => b.Name.Contains(searchTerm)).ToList());
+            SearchResults.AddRange(dbContext.People.Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());
+            
+            ViewBag.Cities = new SelectList(dbContext.Cities, "Id", "Name");
+            //DatabaseResult.AddRange(dbContext.People.Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());
+            
+            return View(SearchResults);
         }
         [HttpPost]
         public IActionResult Create(CreatePersonViewModel cpwm, int CityId)

@@ -22,12 +22,12 @@ PeopleViewModel pwm = new PeopleViewModel();
     <label>Phone Number</label>
     <input type="tel" name="PersonPhoneNumber" />
     <label>City</label>
-    <select name="CityId" asp-items="ViewBag.Cities"></select>
-    <input type="text" name="PersonCity" />
+    <select  name="CityId" asp-items="ViewBag.Cities"></select>
     <input type="submit" />
 
 </form>
 <p>@TempData["Message"]</p>
+<h3>People Index</h3>
 <partial name="_Person.cshtml" model="@Model" />
 
 

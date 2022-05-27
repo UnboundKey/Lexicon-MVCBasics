@@ -4,14 +4,25 @@
         PeopleViewModel pwm = new PeopleViewModel();
         foreach (Person p in Model)
         {
-        <div class="row">
-            <p>@p.Name</p>
-            <p>@p.PhoneNumber</p>
-            <p>@p.City</p>
-            <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
-            <p>ID: @p.Id</p>
-            <p>City: @p.PersonCity.Name</p>
-            <hr/>
-        </div>            
+
+
+    <div class="row">
+                <p>Name: @p.Name</p>
+                <p>Phone Number: @p.PhoneNumber</p>
+            @{
+                if(p.PersonCity == null)
+                {
+                    <p>City: N/A</p>
+                } else
+                {
+                    <p>City: @p.PersonCity.Name</p>
+                    
+                }
+            }
+                <p>ID: @p.Id</p>
+                <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
+                <hr/>
+    </div>            
             }
             }
+            

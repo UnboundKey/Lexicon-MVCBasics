@@ -14,7 +14,8 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CitiesId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -27,7 +28,7 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CountryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -46,7 +47,7 @@ namespace WebApplication1.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     PhoneNumber = table.Column<int>(type: "int", nullable: false),
                     City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: true),
                     PersonCityId = table.Column<int>(type: "int", nullable: true)
@@ -62,20 +63,40 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "CitiesId", "Name" },
+                values: new object[] { 1, null, "Sweden" });
+
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "CitiesId", "Name" },
+                values: new object[] { 2, null, "Denmark" });
+
+            migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "CountryId", "Name" },
-                values: new object[] { 1, null, "Gothenburg" });
+                values: new object[] { 1, 1, "Gothenburg" });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "CountryId", "Name" },
+                values: new object[] { 2, 1, "Stockholm" });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "CountryId", "Name" },
+                values: new object[] { 3, 2, "Kopenhagen" });
 
             migrationBuilder.InsertData(
                 table: "People",
                 columns: new[] { "Id", "City", "Name", "PersonCityId", "PhoneNumber" },
                 values: new object[,]
                 {
-                    { 1, "Gothenburg", "Benjamin Nordin", null, 555123 },
-                    { 2, "Bones Burrow", "Eda Clawthorn", null, 6694875 },
-                    { 3, "Bones Burrow", "King Clawthorn", null, 555213345 },
-                    { 4, "Newtopia", "Marcy Wou", null, 777485632 },
-                    { 5, "Gothenburg", "Jonas Edenstav", null, 31222666 }
+                    { 1, null, "Benjamin Nordin", 1, 555123 },
+                    { 2, null, "Eda Clawthorn", 1, 6694875 },
+                    { 3, null, "King Clawthorn", 1, 555213345 },
+                    { 4, null, "Marcy Wou", 1, 777485632 },
+                    { 5, null, "Jonas Edenstav", 1, 31222666 }
                 });
 
             migrationBuilder.CreateIndex(

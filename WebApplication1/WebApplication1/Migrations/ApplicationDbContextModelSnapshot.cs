@@ -47,7 +47,20 @@ namespace WebApplication1.Migrations
                         new
                         {
                             Id = 1,
+                            CountryId = 1,
                             Name = "Gothenburg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CountryId = 1,
+                            Name = "Stockholm"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CountryId = 2,
+                            Name = "Kopenhagen"
                         });
                 });
 
@@ -59,12 +72,27 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("CitiesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sweden"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Denmark"
+                        });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.People.Person", b =>
@@ -81,8 +109,8 @@ namespace WebApplication1.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("PersonCityId")
                         .HasColumnType("int");
@@ -100,51 +128,53 @@ namespace WebApplication1.Migrations
                         new
                         {
                             Id = 1,
-                            City = "Gothenburg",
                             Name = "Benjamin Nordin",
+                            PersonCityId = 1,
                             PhoneNumber = 555123
                         },
                         new
                         {
                             Id = 2,
-                            City = "Bones Burrow",
                             Name = "Eda Clawthorn",
+                            PersonCityId = 1,
                             PhoneNumber = 6694875
                         },
                         new
                         {
                             Id = 3,
-                            City = "Bones Burrow",
                             Name = "King Clawthorn",
+                            PersonCityId = 1,
                             PhoneNumber = 555213345
                         },
                         new
                         {
                             Id = 4,
-                            City = "Newtopia",
                             Name = "Marcy Wou",
+                            PersonCityId = 1,
                             PhoneNumber = 777485632
                         },
                         new
                         {
                             Id = 5,
-                            City = "Gothenburg",
                             Name = "Jonas Edenstav",
+                            PersonCityId = 1,
                             PhoneNumber = 31222666
                         });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.City", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Country", null)
+                    b.HasOne("WebApplication1.Models.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId");
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.People.Person", b =>
                 {
                     b.HasOne("WebApplication1.Models.City", "PersonCity")
-                        .WithMany("people")
+                        .WithMany("People")
                         .HasForeignKey("PersonCityId");
 
                     b.Navigation("PersonCity");
@@ -152,7 +182,7 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.City", b =>
                 {
-                    b.Navigation("people");
+                    b.Navigation("People");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.Country", b =>

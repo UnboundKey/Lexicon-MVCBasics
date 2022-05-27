@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebApplication1.Data;
 using WebApplication1.Models;
@@ -15,7 +16,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            var dbResult = dbContext.Cities.ToList();
+            var dbResult = dbContext.Cities.Include("People").Include("Country").ToList();
             return View(dbResult);
         }
 
@@ -34,6 +35,29 @@ namespace WebApplication1.Controllers
             }
             ViewBag.Message = "Please make sure everything is filed in correctly and try again";
             return RedirectToAction("CreateCity");
+        }
+
+        public IActionResult DeleteCity(int CityId)
+        {
+            var toDelete = dbContext.Cities.Include("People").Where(p => p.Id == CityId).Single<City>();
+
+            if (toDelete != null)
+            {
+                if (!toDelete.People.Any())
+                {
+                    dbContext.Cities.Remove(toDelete);
+                    dbContext.SaveChanges();
+                    TempData["Message"] = "City Removed Successfully";
+                    return RedirectToAction("Index");
+                }
+                TempData["Message"] = "Could not remove city, Can only remove cities without people";
+
+            }
+            else
+            {
+                TempData["Message"] = "Could not remove City";
+            };
+            return RedirectToAction("Index");
         }
     }
 }

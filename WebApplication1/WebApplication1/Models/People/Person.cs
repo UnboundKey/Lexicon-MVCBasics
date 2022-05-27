@@ -12,7 +12,7 @@ namespace WebApplication1.Models.People
         [Key]
         public int Id { get; set; }
         [Required]
-        [StringLength (20)]
+        [StringLength (50)]
         public string Name { get; set; }
         [Required]
         [Range (0,9999999999)]
@@ -27,6 +27,14 @@ namespace WebApplication1.Models.People
         // Database Compatible Constructor
         public Person(string name, int phoneNumber, int cityId)
         {
+            Name = name;
+            PhoneNumber = phoneNumber;
+            PersonCityId = cityId;
+        }
+
+        public Person(int id, string name, int phoneNumber, int cityId)
+        {
+            this.Id = id;
             Name = name;
             PhoneNumber = phoneNumber;
             PersonCityId = cityId;

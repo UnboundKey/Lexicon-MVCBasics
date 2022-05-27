@@ -1,0 +1,20 @@
+﻿@using WebApplication1.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h3>Country Index</h3>
+
+@foreach(Country country in Model) {
+    <p>@country.Name</p>
+    <p>@country.Id</p>
+    <p>Cities: </p>
+    <ul>
+        @foreach(City ctiy in country.Cities) {
+            <li>@ctiy.Name</li>
+        }
+    </ul>
+    
+    <hr />
+}

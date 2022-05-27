@@ -18,7 +18,7 @@ namespace WebApplication1.Models.People
         }
         
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string PersonName { get; set; }
         [Required]
         [Range(0, 9999999999)]
@@ -28,24 +28,6 @@ namespace WebApplication1.Models.People
         public string PersonCity { get; set; }
         [Required]
         public int personCityId { get; set; }
-
-        public Person Create(string name, int phoneNumber, string city)
-        {
-
-            //Person p = new Person(name, phoneNumber, city);
-            //PeopleViewModel.PeopleList.Add(p);
-            //return p;
-            return null;
-        }
-
-        public Person Create()
-        {
-            Person p = new Person(PersonName, PersonPhoneNumber, PersonCity);
-            PeopleViewModel.PeopleList.Add(p);
-            //ApplicationDbContext.People.Add(p);
-            return p;
-            //return null;
-        }
 
         public Person Create(ApplicationDbContext db,int cityId)
         {
