@@ -25,7 +25,7 @@ namespace WebApplication1.Models.People
         [ForeignKey("PersonCityId")]
         public int? PersonCityId { get; set; }
 
-        public List<Language> KnownLanguages;
+        public List<Language> PersonLanguages { get; set; }
 
         // Database Compatible Constructor
         public Person(string name, int phoneNumber, int cityId)
@@ -41,6 +41,15 @@ namespace WebApplication1.Models.People
             Name = name;
             PhoneNumber = phoneNumber;
             PersonCityId = cityId;
+        }
+
+        public Person(int id, string name, int phoneNumber, int cityId, int languageID)
+        {
+            this.Id = id;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            PersonCityId = cityId;
+            
         }
 
         // Legacy Constructors

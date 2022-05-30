@@ -12,8 +12,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220526183524_Initial")]
-    partial class Initial
+    [Migration("20220530070008_Initial with language 2")]
+    partial class Initialwithlanguage2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,21 @@ namespace WebApplication1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.Property<int>("PeopleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonLanguagesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PeopleId", "PersonLanguagesId");
+
+                    b.HasIndex("PersonLanguagesId");
+
+                    b.ToTable("LanguagePerson");
+                });
 
             modelBuilder.Entity("WebApplication1.Models.City", b =>
                 {
@@ -78,6 +93,7 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -94,6 +110,40 @@ namespace WebApplication1.Migrations
                         {
                             Id = 2,
                             Name = "Denmark"
+                        });
+                });
+
+            modelBuilder.Entity("WebApplication1.Models.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "English"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Swedish"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Japanese"
                         });
                 });
 
@@ -164,11 +214,28 @@ namespace WebApplication1.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.HasOne("WebApplication1.Models.People.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("PersonLanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebApplication1.Models.City", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Country", null)
+                    b.HasOne("WebApplication1.Models.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId");
+
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.People.Person", b =>

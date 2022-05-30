@@ -22,6 +22,21 @@ namespace WebApplication1.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.Property<int>("PeopleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonLanguagesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PeopleId", "PersonLanguagesId");
+
+                    b.HasIndex("PersonLanguagesId");
+
+                    b.ToTable("LanguagePerson");
+                });
+
             modelBuilder.Entity("WebApplication1.Models.City", b =>
                 {
                     b.Property<int>("Id")
@@ -105,11 +120,29 @@ namespace WebApplication1.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "English"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Swedish"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Japanese"
+                        });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.People.Person", b =>
@@ -124,9 +157,6 @@ namespace WebApplication1.Migrations
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
-                    b.Property<int?>("LanguageId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -139,8 +169,6 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LanguageId");
 
                     b.HasIndex("PersonCityId");
 
@@ -184,6 +212,21 @@ namespace WebApplication1.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.HasOne("WebApplication1.Models.People.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApplication1.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("PersonLanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebApplication1.Models.City", b =>
                 {
                     b.HasOne("WebApplication1.Models.Country", "Country")
@@ -195,10 +238,6 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.People.Person", b =>
                 {
-                    b.HasOne("WebApplication1.Models.Language", null)
-                        .WithMany("People")
-                        .HasForeignKey("LanguageId");
-
                     b.HasOne("WebApplication1.Models.City", "PersonCity")
                         .WithMany("People")
                         .HasForeignKey("PersonCityId");
@@ -214,11 +253,6 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.Country", b =>
                 {
                     b.Navigation("Cities");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.Language", b =>
-                {
-                    b.Navigation("People");
                 });
 #pragma warning restore 612, 618
         }
