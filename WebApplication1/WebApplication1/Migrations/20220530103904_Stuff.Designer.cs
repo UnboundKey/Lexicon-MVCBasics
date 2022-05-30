@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -11,9 +12,10 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220530103904_Stuff")]
+    partial class Stuff
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,28 +37,6 @@ namespace WebApplication1.Migrations
                     b.HasIndex("PersonLanguagesId");
 
                     b.ToTable("LanguagePerson");
-
-                    b.HasData(
-                        new
-                        {
-                            PeopleId = 1,
-                            PersonLanguagesId = 1
-                        },
-                        new
-                        {
-                            PeopleId = 1,
-                            PersonLanguagesId = 2
-                        },
-                        new
-                        {
-                            PeopleId = 2,
-                            PersonLanguagesId = 1
-                        },
-                        new
-                        {
-                            PeopleId = 3,
-                            PersonLanguagesId = 1
-                        });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.City", b =>

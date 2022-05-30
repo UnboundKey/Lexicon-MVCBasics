@@ -1,6 +1,20 @@
-﻿@*
+﻿@using WebApplication1.Models
+@using WebApplication1.Models.People
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 <h3>Language Index</h3>
+
+@foreach(Language l in Model) {
+    <p>@l.Id</p>
+    <p>@l.Name</p>
+    <p>People: </p>
+    <ul>
+        @foreach(Person p in l.People)
+        {
+            <li>@p.Name</li>
+        }
+    </ul>
+}

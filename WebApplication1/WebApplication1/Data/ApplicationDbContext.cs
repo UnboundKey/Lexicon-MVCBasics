@@ -8,7 +8,7 @@ using WebApplication1.Models.People;
 
 namespace WebApplication1.Data
 {
-    public class ApplicationDbContext : DbContext 
+    public class ApplicationDbContext : DbContext
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -21,28 +21,27 @@ namespace WebApplication1.Data
         {
             optionsBuilder.UseSqlServer(
                 @"Server=(localdb)\mssqllocaldb;Database=PeopleDb;Trusted_Connection=True");
-            
+
         }
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Person> People { get; set; }
-
+        
         Language english = new Language() { Id = 1, Name = "English" };
         Language swedish = new Language() { Id = 2, Name = "Swedish" };
         Language japanese = new Language() { Id = 3, Name = "Japanese" };
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            //modelBuilder.Entity<Country>().HasMany<City>().WithOne().OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Language>().HasData(english, swedish, japanese);
 
             modelBuilder.Entity<Country>().HasData(new Country() { Id = 1, Name = "Sweden" }, new Country() { Id=2, Name="Denmark"});
 
             modelBuilder.Entity<City>().HasData(new City() { Id = 1, Name = "Gothenburg", CountryId=1 }, new City() { Id = 2, Name = "Stockholm", CountryId=1 }, new City() { Id = 3, Name = "Kopenhagen", CountryId = 2 });
-
 
             modelBuilder.Entity<Person>().HasData(
 
@@ -52,12 +51,15 @@ namespace WebApplication1.Data
            new Person(4, "Marcy Wou", 777485632, 1),
            new Person(5, "Jonas Edenstav", 031222666, 1)
            /*僕の日本語が悪い、ごめんなさい*/
-
                );
+            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 1, PersonLanguagesId = 1}));
+            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 1, PersonLanguagesId = 2}));
+            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 2, PersonLanguagesId = 1 }));
+            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 3, PersonLanguagesId = 1 }));
         }
 
-           
-     }
+
+    }
         
 
 }
