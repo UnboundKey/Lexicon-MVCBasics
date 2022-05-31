@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using WebApplication1.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -18,6 +19,24 @@ namespace WebApplication1.Controllers
         {
             var dbResult = dbContext.Languages.Include("People").ToList();
             return View(dbResult);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Language language)
+        {
+            dbContext.Languages.Add(language);
+            dbContext.SaveChanges();
+            TempData["Message"] = $"Language {language.Name} Created";
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Assign()
+        {
+            return View();
         }
     }
 }

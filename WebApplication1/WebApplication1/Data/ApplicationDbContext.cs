@@ -16,26 +16,19 @@ namespace WebApplication1.Data
 
         }
 
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\mssqllocaldb;Database=PeopleDb;Trusted_Connection=True");
-
-        }
-
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Person> People { get; set; }
         
-        Language english = new Language() { Id = 1, Name = "English" };
-        Language swedish = new Language() { Id = 2, Name = "Swedish" };
-        Language japanese = new Language() { Id = 3, Name = "Japanese" };
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Country>().HasMany<City>().WithOne().OnDelete(DeleteBehavior.SetNull);
+
+            Language english = new Language() { Id = 1, Name = "English" };
+            Language swedish = new Language() { Id = 2, Name = "Swedish" };
+            Language japanese = new Language() { Id = 3, Name = "Japanese" };
 
             modelBuilder.Entity<Language>().HasData(english, swedish, japanese);
 
@@ -52,10 +45,17 @@ namespace WebApplication1.Data
            new Person(5, "Jonas Edenstav", 031222666, 1)
            /*僕の日本語が悪い、ごめんなさい*/
                );
+
+
             modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 1, PersonLanguagesId = 1}));
             modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 1, PersonLanguagesId = 2}));
             modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 2, PersonLanguagesId = 1 }));
             modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 3, PersonLanguagesId = 1 }));
+
+            modelBuilder.Entity<Country>().HasMany(o => o.Cities).WithOne(o => o.Country).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<City>().HasMany(o => o.People).WithOne(o => o.PersonCity).OnDelete(DeleteBehavior.SetNull);
+
+            
         }
 
 

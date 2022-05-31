@@ -46,15 +46,12 @@ namespace WebApplication1.Controllers
 
             if (toDelete != null)
             {
-                if (!toDelete.People.Any())
-                {
+               
                     dbContext.Cities.Remove(toDelete);
                     dbContext.SaveChanges();
                     TempData["Message"] = "City Removed Successfully";
                     return RedirectToAction("Index");
-                }
-                TempData["Message"] = "Could not remove city, Can only remove cities without people";
-
+                    
             }
             else
             {

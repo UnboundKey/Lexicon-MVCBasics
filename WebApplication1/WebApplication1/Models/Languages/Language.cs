@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication1.Models.People;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.Languages
 {
     public class Language
     {
