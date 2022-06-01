@@ -5,8 +5,9 @@
 }
 
 <h3>Assign Language to Person</h3>
-<form asp-action="Asign" method="post">
-
+<form asp-action="Assign" method="post">
+    <select name="personId" asp-items="ViewBag.People"></select>
+    <select name="languageId" asp-items="ViewBag.Languages"></select>
     <input type="submit"/>
 </form>
 
