@@ -1,5 +1,5 @@
-﻿@    using WebApplication1.Models
-@    using WebApplication1.Models.People
+﻿@using WebApplication1.Models.Languages
+@using WebApplication1.Models.People
 
     @{
         PeopleViewModel pwm = new PeopleViewModel();
@@ -8,29 +8,29 @@
 
 
     <div class="row">
-                <p>Name: @p.Name</p>
-                <p>Phone Number: @p.PhoneNumber</p>
-            @{
+                    <p>Name: @p.Name</p>
+                    <p>Phone Number: @p.PhoneNumber</p>
+                @{
                 if(p.PersonCity == null)
                 {
-                    <p>City: N/A</p>
+                            <p>City: N/A</p>
                 } else
                 {
-                    <p>City: @p.PersonCity.Name</p>
+                            <p>City: @p.PersonCity.Name</p>
                     
                 }
-            }
-            <p>Languages</p>
-            <ul>
-            @foreach(Language l in p.PersonLanguages)
-            {
-             <li>@l.Name</li>   
-            }
-            </ul>
-            
-                <p>ID: @p.Id</p>
-                <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
-                <hr/>
+                }
+                <p>Languages</p>
+                <ul>
+                    @foreach(var o in p.LanguagesLinkObject)
+                {
+                        <li>@o.Language.Name</li>
+                }
+                </ul>
+                
+                    <p>ID: @p.Name</p>
+                    <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
+                    <hr/>
     </div>            
             }
             }

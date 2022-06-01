@@ -26,7 +26,7 @@ public class PeopleController : Controller
         private List<Person> DatabaseResult;
         public object Index()
         {
-            DatabaseResult = dbContext.People.Include(e => e.PersonLanguages).ToList();
+            DatabaseResult = dbContext.People.Include("LanguagesLinkObject.Language").ToList();
             ViewBag.Cities = new SelectList(dbContext.Cities, "Id", "Name");
             return View(DatabaseResult);
         }

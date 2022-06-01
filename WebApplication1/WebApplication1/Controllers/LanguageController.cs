@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using WebApplication1.Data;
-using WebApplication1.Models;
+using WebApplication1.Models.Languages;
 
 namespace WebApplication1.Controllers
 {
@@ -17,7 +18,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Index()
         {
-            var dbResult = dbContext.Languages.Include("People").ToList();
+            var dbResult = dbContext.Languages.Include("People.Person").ToList();
             return View(dbResult);
         }
 
@@ -28,6 +29,7 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Create(Language language)
         {
+            
             dbContext.Languages.Add(language);
             dbContext.SaveChanges();
             TempData["Message"] = $"Language {language.Name} Created";

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using WebApplication1.Models;
+using WebApplication1.Models.Languages;
 using WebApplication1.Models.People;
 
 namespace WebApplication1.Data
@@ -13,14 +14,14 @@ namespace WebApplication1.Data
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<Country> Countries { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Language> Languages { get; set; }
         public DbSet<Person> People { get; set; }
-        
+        public DbSet<PersonLanguage> PersonLanguage { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -34,8 +35,7 @@ namespace WebApplication1.Data
 
             modelBuilder.Entity<Country>().HasData(new Country() { Id = 1, Name = "Sweden" }, new Country() { Id=2, Name="Denmark"});
 
-            modelBuilder.Entity<City>().HasData(new City() { Id = 1, Name = "Gothenburg", CountryId=1 }, new City() { Id = 2, Name = "Stockholm", CountryId=1 }, new City() { Id = 3, Name = "Kopenhagen", CountryId = 2 });
-
+            modelBuilder.Entity<City>().HasData(new City() { Id = 1, Name = "Gothenburg", CountryId = 1 }, new City() { Id = 2, Name = "Stockholm", CountryId = 1 }, new City() { Id = 3, Name = "Kopenhagen", CountryId = 2 });
             modelBuilder.Entity<Person>().HasData(
 
            new Person(1, "Benjamin Nordin", 555123, 1) { },
@@ -43,19 +43,26 @@ namespace WebApplication1.Data
            new Person(3, "King Clawthorn", 555213345, 1),
            new Person(4, "Marcy Wou", 777485632, 1),
            new Person(5, "Jonas Edenstav", 031222666, 1)
-           /*僕の日本語が悪い、ごめんなさい*/
+           /*OK？　本当に、コドが悪い*/
                );
-
-
-            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 1, PersonLanguagesId = 1}));
-            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 1, PersonLanguagesId = 2}));
-            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 2, PersonLanguagesId = 1 }));
-            modelBuilder.Entity<Language>().HasMany(p => p.People).WithMany(l => l.PersonLanguages).UsingEntity(j => j.HasData(new { PeopleId = 3, PersonLanguagesId = 1 }));
-
+            
             modelBuilder.Entity<Country>().HasMany(o => o.Cities).WithOne(o => o.Country).OnDelete(DeleteBehavior.SetNull);
             modelBuilder.Entity<City>().HasMany(o => o.People).WithOne(o => o.PersonCity).OnDelete(DeleteBehavior.SetNull);
 
+            modelBuilder.Entity<PersonLanguage>().HasKey(pl => new { pl.PersonId, pl.LanguageId });
+            modelBuilder.Entity<PersonLanguage>().HasOne(pl => pl.Person).WithMany(pl => pl.LanguagesLinkObject).HasForeignKey(pl => pl.PersonId);
+            modelBuilder.Entity<PersonLanguage>().HasOne(pl => pl.Language).WithMany(pl => pl.People).HasForeignKey(pl => pl.LanguageId);
+
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {PersonId = 1,LanguageId = 1});
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {PersonId = 2,LanguageId = 1});
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {PersonId = 3,LanguageId = 1});
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {PersonId = 4,LanguageId = 1});
             
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 1, LanguageId = 3 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 1, LanguageId = 2 });
+
+
+
         }
 
 
