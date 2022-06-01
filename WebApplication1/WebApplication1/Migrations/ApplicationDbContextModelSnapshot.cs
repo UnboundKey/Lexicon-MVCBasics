@@ -152,7 +152,7 @@ namespace WebApplication1.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("PersonCityId")
+                    b.Property<int>("PersonCityId")
                         .HasColumnType("int");
 
                     b.Property<int>("PhoneNumber")
@@ -253,8 +253,7 @@ namespace WebApplication1.Migrations
                 {
                     b.HasOne("WebApplication1.Models.Country", "Country")
                         .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("CountryId");
 
                     b.Navigation("Country");
                 });
@@ -271,7 +270,8 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.Models.City", "PersonCity")
                         .WithMany("People")
                         .HasForeignKey("PersonCityId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PersonCity");
                 });

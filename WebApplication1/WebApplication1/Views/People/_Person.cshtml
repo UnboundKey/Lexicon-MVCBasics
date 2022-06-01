@@ -20,12 +20,14 @@
                     
                 }
                 }
-                <p>Languages</p>
+                <p>Languages:</p>
+                <a asp-controller="Language" action="Index">Manage Languages</a>
                 <ul>
                     @foreach(var o in p.LanguagesLinkObject)
                 {
                         <li>@o.Language.Name</li>
                 }
+                
                 </ul>
                 
                     <p>ID: @p.Id</p>

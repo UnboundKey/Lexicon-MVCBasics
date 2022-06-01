@@ -24,7 +24,7 @@ namespace WebApplication1.Models.People
 
         public City PersonCity { get; set; }
         [ForeignKey("PersonCityId")]
-        public int? PersonCityId { get; set; }
+        public int PersonCityId { get; set; }
         public List<Language> Languages { get; set; }
         public List<PersonLanguage> LanguagesLinkObject { get; set; }
 

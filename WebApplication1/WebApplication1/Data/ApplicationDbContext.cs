@@ -46,8 +46,8 @@ namespace WebApplication1.Data
            /*OK？　本当に、コドが悪い*/
                );
             
-            modelBuilder.Entity<Country>().HasMany(o => o.Cities).WithOne(o => o.Country).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<City>().HasMany(o => o.People).WithOne(o => o.PersonCity).OnDelete(DeleteBehavior.SetNull);
+            modelBuilder.Entity<Country>().HasMany(o => o.Cities).WithOne(o => o.Country).OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<City>().HasMany(o => o.People).WithOne(o => o.PersonCity).OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<PersonLanguage>().HasKey(pl => new { pl.PersonId, pl.LanguageId });
             modelBuilder.Entity<PersonLanguage>().HasOne(pl => pl.Person).WithMany(pl => pl.LanguagesLinkObject).HasForeignKey(pl => pl.PersonId);
@@ -60,8 +60,6 @@ namespace WebApplication1.Data
             
             modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 1, LanguageId = 3 });
             modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { PersonId = 1, LanguageId = 2 });
-
-
 
         }
 
