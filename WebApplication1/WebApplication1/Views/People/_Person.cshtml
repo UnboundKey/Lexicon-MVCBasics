@@ -31,7 +31,10 @@
                 </ul>
                 
                     <p>ID: @p.Id</p>
+                    <div class="object-actions">
                     <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
+                    <a asp-action="Edit" asp-route-id="@p.Id">Edit Person</a>
+                    </div>
                     <hr/>
     </div>            
             }

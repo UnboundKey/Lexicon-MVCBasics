@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ using WebApplication1.Models.People;
 
 namespace WebApplication1.Controllers
 {
-
+[Authorize]
 public class PeopleController : Controller
     {
 
@@ -59,6 +60,27 @@ public class PeopleController : Controller
             }
             return RedirectToAction("Index");
         }
+        
+        public IActionResult Edit(int id) {
+            ViewBag.Cities = new SelectList(dbContext.Cities, "Id", "Name");
+
+            var dbResult = dbContext.People.Where(p => p.Id == id).Single<Person>();
+            return View(dbResult);
+        }
+        [HttpPost]
+        public IActionResult Edit(Person person)
+        {
+            var ResultPerson = dbContext.People.Where(p => p.Id == person.Id).Single<Person>();
+            if (ResultPerson != null)
+            {
+                ResultPerson.Name = person.Name;
+                ResultPerson.PhoneNumber = person.PhoneNumber;
+                ResultPerson.PersonCityId = person.PersonCityId;
+                dbContext.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Delete(int personId)
         {
             Person.Delete(personId,this, dbContext);

@@ -44,6 +44,10 @@
                 <li>
                     <a asp-controller="Language" , asp-action="Index">Language Index</a>
                 </li>
+                <li>
+                    <a asp-controller="Admin", asp-action="Index">Admin</a>
+                </li>
+                <partial name="_LoginPartial" />
             </ul>
         </header>
         @RenderBody()
@@ -51,7 +55,8 @@
         <footer>
             <p>&copy; Benjamin Nordin @DateTime.Now.ToString("yy-MM-dd")</p>
         </footer>
-    
     </div>
+
+    @RenderSection("Scripts", required: false);
 </body>
 </html>

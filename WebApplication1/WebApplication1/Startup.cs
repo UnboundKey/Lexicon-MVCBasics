@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApplication1.Data;
+using WebApplication1.Models;
 
 namespace WebApplication1
 {
@@ -38,6 +40,11 @@ namespace WebApplication1
 
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultDatabase")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
            
         }
 
@@ -50,6 +57,10 @@ namespace WebApplication1
             }
             
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseStaticFiles();
             app.UseSession();
             app.UseEndpoints(endpoints =>
@@ -57,8 +68,11 @@ namespace WebApplication1
                 endpoints.MapControllerRoute("fevercheck", "fevercheck", defaults: new { controller = "Doctor", action = "FeverCheck" });
                 endpoints.MapControllerRoute("GuessingGame", "GuessingGame", defaults: new { controller = "Games", action = "NumberGuesser" });
                 endpoints.MapControllerRoute(default, "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
                 // endpoints.MapGet("/", async context => { await context.Response.WriteAsync("Hello World!"); });
             });
+            
         }
     }
 }
