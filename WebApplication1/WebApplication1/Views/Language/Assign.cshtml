@@ -10,8 +10,8 @@
 {
         <select name="personId" asp-items="ViewBag.People"></select>
     } else
-    {
-        <select name="personId" asp-items="ViewBag.People" value="@Model" disabled ></select>
+    { 
+        <select name="personId" asp-items="ViewBag.People" value="@Model" disabled></select>
         <input name="personId" type="hidden" value="@Model"/>
     }
     <select name="languageId" asp-items="ViewBag.Languages"></select>

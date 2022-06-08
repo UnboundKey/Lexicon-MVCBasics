@@ -79,12 +79,18 @@ namespace WebApplication1.Controllers
 
         }
         [Authorize(Roles = AccountTypes.Standard + ", " + AccountTypes.Administrator)]
+
+        //TODO Make sure it redirects to the last page the user was on before unassigning
         public IActionResult Unassign(int personId, int languageId)
         {
             var toDelete = dbContext.PersonLanguage.Where(o => o.PersonId == personId).Where(o => o.LanguageId == languageId).Single();
             dbContext.PersonLanguage.Remove(toDelete);
             dbContext.SaveChanges();
-            return RedirectToAction("Index");
+            if (User.IsInRole(AccountTypes.Administrator))
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", "People");
         }
 
         [Authorize(Roles = AccountTypes.Administrator)]
