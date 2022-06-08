@@ -267,3 +267,10 @@ C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplicat
 C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\obj\Debug\net6.0\WebApplication1.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Mvc.dll
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Razor.dll
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.Helpers.dll
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.WebPages.Deployment.dll
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.WebPages.Razor.dll
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\System.Web.WebPages.dll
+C:\Users\Benjamin\Documents\GitHub\Lexicon-MVCBasics\WebApplication1\WebApplication1\bin\Debug\net6.0\Microsoft.Web.Infrastructure.dll

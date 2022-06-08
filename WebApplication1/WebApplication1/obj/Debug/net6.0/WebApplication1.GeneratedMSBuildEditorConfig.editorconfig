@@ -175,6 +175,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/AJAX/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQUpBWFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -185,6 +189,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/City/CreateCity.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0eVxDcmVhdGVDaXR5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/City/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0eVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/City/Index.cshtml]
@@ -241,6 +249,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/People/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVvcGxlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/People/_CreatePerson.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVvcGxlXF9DcmVhdGVQZXJzb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Benjamin/Documents/GitHub/Lexicon-MVCBasics/WebApplication1/WebApplication1/Views/People/_Person.cshtml]

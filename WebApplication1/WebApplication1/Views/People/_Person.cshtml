@@ -21,19 +21,24 @@
                 }
                 }
                 <p>Languages:</p>
-                <a asp-controller="Language" action="Index">Manage Languages</a>
                 <ul>
                     @foreach(var o in p.LanguagesLinkObject)
                 {
-                        <li>@o.Language.Name</li>
+                        <li>@o.Language.Name -  <a asp-controller="Language" asp-action="Unassign" asp-route-personId="@p.Id" asp-route-languageId="@o.LanguageId"> Unassign Language</a></li>
                 }
                 
                 </ul>
                 
                     <p>ID: @p.Id</p>
                     <div class="object-actions">
-                    <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
                     <a asp-action="Edit" asp-route-id="@p.Id">Edit Person</a>
+                    <a asp-controller="Language" asp-action="Assign" asp-route-id="@p.Id">Assign Language</a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Delete" asp-route-personId="@p.Id">Delete Person</a>
+                    
+                }
+
                     </div>
                     <hr/>
     </div>            

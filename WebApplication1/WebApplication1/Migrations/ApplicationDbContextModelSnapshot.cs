@@ -47,6 +47,22 @@ namespace WebApplication1.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "4e99eacd-07d2-47f0-a26c-effba7e67fb6",
+                            ConcurrencyStamp = "7242a4b9-6377-4369-a064-48c00b008a25",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "8acd5f9c-578b-4b83-9706-3aa44c0b8d22",
+                            ConcurrencyStamp = "55255462-f971-43c5-9da5-4e9202de6bfd",
+                            Name = "Standard",
+                            NormalizedName = "STANDARD"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -134,6 +150,13 @@ namespace WebApplication1.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "e8791187-7e99-44e2-b0df-36d4e84faed4",
+                            RoleId = "4e99eacd-07d2-47f0-a26c-effba7e67fb6"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -227,6 +250,25 @@ namespace WebApplication1.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e8791187-7e99-44e2-b0df-36d4e84faed4",
+                            AccessFailedCount = 0,
+                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ConcurrencyStamp = "556da964-cf88-47ce-8afd-cc93bb566021",
+                            Email = "admin@admin.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedUserName = "ADMIN@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEISKcuXVO4r2VopL3H4s7GtyCE5bbLM+42/mGzkqffKITPDKAo+tt0w2ypVOyAHZbw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "010ec499-c91a-4ceb-b0a7-6aed61ed7a81",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@admin.com"
+                        });
                 });
 
             modelBuilder.Entity("WebApplication1.Models.City", b =>

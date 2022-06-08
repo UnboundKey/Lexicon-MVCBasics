@@ -6,7 +6,14 @@
 
 <h3>Assign Language to Person</h3>
 <form asp-action="Assign" method="post">
-    <select name="personId" asp-items="ViewBag.People"></select>
+    @if (Model == 0)
+{
+        <select name="personId" asp-items="ViewBag.People"></select>
+    } else
+    {
+        <select name="personId" asp-items="ViewBag.People" value="@Model" disabled ></select>
+        <input name="personId" type="hidden" value="@Model"/>
+    }
     <select name="languageId" asp-items="ViewBag.Languages"></select>
     <input type="submit"/>
 </form>

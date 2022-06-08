@@ -38,8 +38,8 @@ public class PeopleController : Controller
             pwm.searchTerm = searchTerm;
             var SearchResults = new List<Person>();
 
-            SearchResults.AddRange(dbContext.People.Where(b => b.Name.Contains(searchTerm)).ToList());
-            SearchResults.AddRange(dbContext.People.Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());
+            SearchResults.AddRange(dbContext.People.Include("LanguagesLinkObject.Language").Where(b => b.Name.Contains(searchTerm)).ToList());
+            SearchResults.AddRange(dbContext.People.Include("LanguagesLinkObject.Language").Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());
             
             ViewBag.Cities = new SelectList(dbContext.Cities, "Id", "Name");
             //DatabaseResult.AddRange(dbContext.People.Where(b => b.PersonCity.Name.Contains(searchTerm)).ToList());

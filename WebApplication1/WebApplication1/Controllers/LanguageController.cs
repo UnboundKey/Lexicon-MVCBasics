@@ -1,14 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using WebApplication1.Data;
+using WebApplication1.Models;
 using WebApplication1.Models.Languages;
 using WebApplication1.Models.People;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Roles = AccountTypes.Administrator + ", " + AccountTypes.Standard)]
     public class LanguageController : Controller
     {
 
@@ -18,33 +23,38 @@ namespace WebApplication1.Controllers
             this.dbContext = dbContext;
         }
 
+        [Authorize(Roles = AccountTypes.Administrator)]
         public IActionResult Index()
         {
             var dbResult = dbContext.Languages.Include("People.Person").ToList();
             return View(dbResult);
         }
 
+        [Authorize(Roles = AccountTypes.Administrator)]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = AccountTypes.Administrator)]
         public IActionResult Create(Language language)
         {
-            
+
             dbContext.Languages.Add(language);
             dbContext.SaveChanges();
             TempData["Message"] = $"Language {language.Name} Created";
             return RedirectToAction("Index");
         }
-
-        public IActionResult Assign()
+        [Authorize(Roles = AccountTypes.Standard + ", " + AccountTypes.Administrator)]
+        public IActionResult Assign(int id)
         {
             ViewBag.People = new SelectList(dbContext.People,"Id", "Name");
             ViewBag.Languages = new SelectList(dbContext.Languages, "Id", "Name");
-            return View();
+            return View(id);
         }
+
         [HttpPost]
+        [Authorize(Roles = AccountTypes.Standard + ", " + AccountTypes.Administrator)]
         public IActionResult Assign(int personId, int languageId)
         {
             var alreadyknownlanguage = dbContext.PersonLanguage.Find(personId, languageId);
@@ -60,9 +70,15 @@ namespace WebApplication1.Controllers
                 TempData["Message"] = $"Language Not Assigned, Language is already known by person";
             }
 
-            return RedirectToAction("Index");
-        }
+            if(User.IsInRole(AccountTypes.Administrator))
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index", "People");
 
+
+        }
+        [Authorize(Roles = AccountTypes.Standard + ", " + AccountTypes.Administrator)]
         public IActionResult Unassign(int personId, int languageId)
         {
             var toDelete = dbContext.PersonLanguage.Where(o => o.PersonId == personId).Where(o => o.LanguageId == languageId).Single();
@@ -71,6 +87,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = AccountTypes.Administrator)]
         public IActionResult Delete(int languageId)
         {
             var toDelete = dbContext.Languages.Where(l => l.Id == languageId).Single();

@@ -23,9 +23,10 @@
         <ul>
             @foreach(Person p in c.People)
             {
-            <li>@p.Name</li>   
+            <li>@p.Name <a asp-controller="People" asp-action="Edit" asp-route-id="@p.Id">Edit Person</a></li>   
             }
         </ul>
+        <a asp-action="Edit" asp-route-id="@c.Id">Edit City</a>
         <a asp-action="DeleteCity" asp-route-CityId="@c.Id">Nuke City (Kills Inhabitants)</a>
         <hr/>
     </div>
