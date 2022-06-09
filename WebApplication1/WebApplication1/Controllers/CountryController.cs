@@ -61,7 +61,10 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-
-
+        //TODO add edit functionallity
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }

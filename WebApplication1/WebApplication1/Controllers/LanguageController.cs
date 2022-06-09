@@ -86,6 +86,7 @@ namespace WebApplication1.Controllers
             var toDelete = dbContext.PersonLanguage.Where(o => o.PersonId == personId).Where(o => o.LanguageId == languageId).Single();
             dbContext.PersonLanguage.Remove(toDelete);
             dbContext.SaveChanges();
+            TempData["Message"] = "Successfully unassigned language from person";
             if (User.IsInRole(AccountTypes.Administrator))
             {
                 return RedirectToAction("Index");

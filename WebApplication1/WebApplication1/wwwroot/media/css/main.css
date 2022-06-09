@@ -47,3 +47,12 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.faux-table {
+    max-width: 700px;
+    margin: auto;
+}
+
+.faux-table p{
+    display: inline;
+}
