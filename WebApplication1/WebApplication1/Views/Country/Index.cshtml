@@ -13,10 +13,11 @@
     <p>Country ID: @country.Id</p>
     <p>Cities: </p>
     <ul>
-        @foreach(City ctiy in country.Cities) {
-            <li>@ctiy.Name</li>
+        @foreach(City city in country.Cities) {
+            <li>@city.Name - <a asp-action="Edit" asp-controller="City" asp-route-id="@city.Id">Edit City</a></li>
         }
     </ul>
+    <a asp-action="Edit" asp-route-id="@country.Id">Edit Country</a>
     <a asp-action="DeleteCountry" asp-route-CountryId="@country.Id">Nuke Country (Kills Inhabitants of any city within it's borders)</a>
     <hr />
 }

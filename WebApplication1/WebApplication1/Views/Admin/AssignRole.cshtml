@@ -3,7 +3,8 @@
 *@
 @{
 }
-
+<h3>Assign Role</h3>
+<p>@TempData["Message"]</p>
 <form asp-action="AssignRole" method="post">
     <select name="user" asp-items="ViewBag.Users"></select>
     <select name="role" asp-items="ViewBag.Roles"></select>

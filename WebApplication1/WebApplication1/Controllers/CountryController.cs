@@ -61,10 +61,18 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index");
         }
 
-        //TODO add edit functionallity
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return View();
+            var dbResult = dbContext.Countries.Where(p => p.Id == id).SingleOrDefault();
+            return View(dbResult);
+        }
+        [HttpPost]
+        public IActionResult Edit(int id, string name)
+        {
+            var dbResult = dbContext.Countries.Where(p => p.Id == id).SingleOrDefault();
+            dbResult.Name = name;
+            dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

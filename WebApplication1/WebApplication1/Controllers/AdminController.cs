@@ -52,6 +52,10 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> AssignRole(string user, string role)
         {
+            ViewBag.Roles = new SelectList(_roleManager.Roles, "Name", "Name");
+            ViewBag.Users = new SelectList(_userManager.Users, "Id", "UserName");
+
+
             var _user = await _userManager.FindByIdAsync(user);
             IdentityResult result = await _userManager.AddToRoleAsync(_user, role);
             if(result.Succeeded)
