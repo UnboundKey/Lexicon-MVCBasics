@@ -15,6 +15,7 @@ namespace WebApplication1.Controllers
         JsonSerializerOptions jsonSerializerOptions = new()
             {
                 ReferenceHandler = ReferenceHandler.Preserve
+                
             };
 
 
@@ -35,8 +36,9 @@ namespace WebApplication1.Controllers
         {
             //var dbResult = dbContext.PersonLanguage.Include("Person").Include("Language");
             var dbResult = dbContext.People.Include("LanguagesLinkObject.Language").Include("PersonCity");
+            var dbresult = dbContext.People.Include(p => p.PersonCity).Include(p=>p.LanguagesLinkObject);
 
-            var jsoned = Json(dbResult, jsonSerializerOptions);
+            var jsoned = Json(dbresult, jsonSerializerOptions);
 
             return jsoned;
         }
