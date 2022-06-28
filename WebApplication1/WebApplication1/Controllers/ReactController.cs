@@ -37,7 +37,7 @@ namespace WebApplication1.Controllers
         public JsonResult GetAll()
         {
             //var dbResult = dbContext.PersonLanguage.Include("Person").Include("Language");
-            var dbResult = dbContext.People.Include(p => p.PersonCity).Include(p=>p.LanguagesLinkObject);
+            var dbResult = dbContext.People.Include(p => p.PersonCity).Include(p=> p.PersonCity.Country).Include(p=>p.LanguagesLinkObject);
             
             //Clean up database data and send it as json
             List<PersonTO> PeopleCleanedUp = new List<PersonTO>();
