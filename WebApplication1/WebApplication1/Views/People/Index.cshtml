@@ -8,7 +8,6 @@ PeopleViewModel pwm = new PeopleViewModel();
 
 @using WebApplication1.Models.People
 
-@model WebApplication1.Models.People.PeopleViewModel;
 
 <form asp-action="Index" method="post">
     <label>Search</label>
@@ -16,17 +15,10 @@ PeopleViewModel pwm = new PeopleViewModel();
     <input type="submit" />
 </form>
 
-<h3>Create Person</h3>
-<form asp-action="Create" method="post">
-    <label>Person Name</label>
-    <input type="text" name="PersonName" />
-    <label>Phone Number</label>
-    <input type="tel" name="PersonPhoneNumber" />
-    <label>City</label>
-    <input type="text" name="PersonCity" />
-    <input type="submit" />
-</form>
+<partial name="_CreatePerson.cshtml" />
 
-<partial name="_Person.cshtml" model="@Model.searchTerm" />
+<p>@TempData["Message"]</p>
+<h3>People Index</h3>
+<partial name="_Person.cshtml" model="@Model" />
 
 

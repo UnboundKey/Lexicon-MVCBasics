@@ -6,34 +6,39 @@
 .project h1{
     font-size: 1.25em;
 }
-header {
+.main-nav {
     display: flex;
-    justify-items:center;
+    justify-items: center;
 }
 
-header img {
+.main-nav img {
     width: 50px;
     height: 50px;
 }
-header > ul {
-    justify-content:center;
+.main-nav > ul {
+    justify-content: center;
     word-spacing: -0.25rem;
 }
-header > ul > li{
-    display:inline-block;
+.main-nav > ul > li {
+    display: inline-block;
 }
-header > ul > li > a {
+.main-nav > ul > li > a {
     color: #2a2a2a;
     text-decoration: none;
-    padding:1rem;
+    padding:0.5rem;
 }
 
     header ul li a:hover {
         color: white;
         background-color:cadetblue;
-        border-radius: 1rem;
+        border-radius: 0rem;
 
     }
+.main-nav > .navbar-nav {
+    float: right;
+}
+
+
 .projects-container {
     max-width: 95%;
     margin: auto;
@@ -41,4 +46,13 @@ header > ul > li > a {
 .project {
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.faux-table {
+    max-width: 700px;
+    margin: auto;
+}
+
+.faux-table p{
+    display: inline;
 }
