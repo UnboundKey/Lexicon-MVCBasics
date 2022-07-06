@@ -29,8 +29,11 @@ namespace WebApplication1
             Configuration = config;
         }
         
+
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
 
             services.AddSession(options =>
@@ -45,6 +48,7 @@ namespace WebApplication1
                 .AddDefaultUI()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
            
         }
 
@@ -56,6 +60,8 @@ namespace WebApplication1
                 app.UseDeveloperExceptionPage();
             }
             
+            app.UseCors(options => options.WithOrigins("*").AllowAnyHeader().AllowAnyMethod());
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -63,6 +69,9 @@ namespace WebApplication1
 
             app.UseStaticFiles();
             app.UseSession();
+
+            app.UseCors("MyAllowSpecificOrigins");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("fevercheck", "fevercheck", defaults: new { controller = "Doctor", action = "FeverCheck" });
